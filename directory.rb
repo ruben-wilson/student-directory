@@ -13,34 +13,41 @@ students = [
 ]
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(125)
+  puts  "-------------".center(125)
 end
 
 def print(students)
   i = 0
   while i < students.length
-    puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)".center(125)
     i += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(125)
 end
 
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
+  puts "Please enter the names of the students".center(125)
+  puts "To finish, just hit return twice".center(125)
 
   students = []
-
+  month = :november
   name = gets.chomp
 
   while !name.empty? do
+    puts "Please enter you'r cohort".center(125)
+
+    month = gets.chomp
+    if month.empty?
+      month = :november
+    end
+
+    students << {name: name, cohort: month.to_s}
+    puts "Now we have #{students.count} students".center(125)
     
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
 
     name = gets.chomp
   end
