@@ -41,11 +41,12 @@ def process(selection)
   when "1"
     input_students
   when "2"
+    
     show_students
   when "3"
     save_students
   when "4"
-    load_students()
+    try_load_students
   when "9"
     exit # this will cause the program to terminate
   else
@@ -79,9 +80,9 @@ def save_students
   file.close
 end
 
-def load_students(filename= "students.csv")
+def load_students(filename = "students.csv")
   file = File.open(filename, "r")
-  file.readlines.each do |line|
+  file.readlines.each do |line| 
   name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
@@ -89,6 +90,9 @@ def load_students(filename= "students.csv")
 end
 
 def try_load_students
+  if ARGV.length == 0
+    load_students
+  end
   filename = ARGV.first 
   return if filename.nil? 
   if File.exist?(filename) 
